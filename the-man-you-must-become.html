@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Man You Must Become – Father Empowering</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:  #1A1A1A;
+  --orange: #C85A00;
+  --white:  #FFFFFF;
+  --off:    #F2F0EB;
+  --ink:    #1A1A1A;
+  --ink2:   #444444;
+  --lit:    #E0E0E0;
+  --lit2:   #9A9A9A;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── REVEAL ── */
+.page, .break-page {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.page.visible, .break-page.visible { opacity: 1; transform: none; }
+
+/* ── DARK / LIGHT ── */
+.pg-dark {
+  background: var(--black); color: var(--white);
+  width: 100%; max-width: 820px; margin: 0 auto;
+  padding: 80px 64px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.pg-light {
+  background: var(--off); color: var(--ink);
+  width: 100%; max-width: 820px; margin: 0 auto;
+  padding: 80px 64px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+/* ── SHARED ATOMS ── */
+.section-label {
+  font-size: 10px; letter-spacing: 5px;
+  text-transform: uppercase; display: block;
+  margin-bottom: 12px; color: var(--orange);
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(34px, 6vw, 54px);
+  letter-spacing: 2px; line-height: 1;
+  margin-bottom: 10px;
+}
+.pg-dark .section-title { color: var(--white); }
+.pg-light .section-title { color: var(--ink); }
+
+.chapter-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--orange);
+  display: block; margin-bottom: 8px;
+}
+.divider { width: 44px; height: 2px; background: var(--orange); margin: 22px 0 34px; }
+
+.body-text { font-size: 14.5px; line-height: 1.8; max-width: 640px; }
+.pg-dark  .body-text { color: var(--lit); }
+.pg-light .body-text { color: var(--ink2); }
+
+/* ── COVER ── */
+#cover {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between;
+  padding: 64px 64px 52px; background: var(--black);
+  border-bottom: 1px solid rgba(200,90,0,0.3);
+  max-width: 820px; margin: 0 auto;
+}
+.cover-brand { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 5px; color: var(--orange); }
+.cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 64px 0 44px; }
+.cover-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 9vw, 88px); line-height: .9; letter-spacing: 2px; color: var(--white); }
+.cover-title span { color: var(--orange); }
+.cover-rule { width: 56px; height: 3px; background: var(--orange); margin: 28px 0; }
+.cover-sub { font-size: 17px; letter-spacing: 0.5px; color: var(--white); max-width: 520px; font-weight: 600; line-height: 1.65; }
+.cover-footer { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; }
+.cover-footer-label { font-size: 10px; letter-spacing: 3px; color: var(--lit2); text-transform: uppercase; }
+.cover-handle { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px; color: var(--orange); }
+
+/* ── LETTER ── */
+.letter-body p { margin-bottom: 18px; max-width: 580px; font-size: 14.5px; }
+.pg-light .letter-body p { color: var(--ink2); }
+.pg-dark  .letter-body p { color: var(--lit); }
+.letter-pull {
+  border-left: 3px solid var(--orange);
+  padding: 16px 24px; margin: 32px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 1.5px; line-height: 1.2;
+}
+.pg-light .letter-pull { background: rgba(200,90,0,0.08); color: var(--ink); }
+.pg-dark  .letter-pull { background: rgba(200,90,0,0.12); color: var(--white); }
+.letter-sig { margin-top: 40px; }
+.letter-sig .name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--orange); }
+.letter-sig .role { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; margin-top: 4px; }
+.pg-light .letter-sig .role { color: var(--ink2); }
+.pg-dark  .letter-sig .role { color: var(--lit2); }
+
+/* ── BREAK STATE ── */
+.break-page {
+  min-height: 46vh; display: flex; align-items: center; justify-content: center; text-align: center;
+  background: var(--black); border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.break-inner {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 5vw, 40px); letter-spacing: 3px;
+  color: var(--white); max-width: 620px; padding: 60px; line-height: 1.2;
+}
+.break-inner span { color: var(--orange); }
+
+/* ── CHAPTER CONTENT ── */
+.chapter-intro { max-width: 620px; margin-bottom: 40px; font-size: 14.5px; line-height: 1.8; }
+.pg-dark  .chapter-intro { color: var(--lit); }
+.pg-light .chapter-intro { color: var(--ink2); }
+
+.sub-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 2px; margin: 36px 0 14px;
+}
+.pg-dark  .sub-heading { color: var(--white); }
+.pg-light .sub-heading { color: var(--ink); }
+
+.body-p { font-size: 14px; line-height: 1.8; max-width: 620px; margin-bottom: 16px; }
+.pg-dark  .body-p { color: var(--lit); }
+.pg-light .body-p { color: var(--ink2); }
+
+/* fact boxes */
+.fact-box {
+  margin: 32px 0; padding: 20px 24px;
+  border-left: 3px solid var(--orange);
+}
+.pg-dark  .fact-box { background: rgba(200,90,0,0.10); }
+.pg-light .fact-box { background: rgba(200,90,0,0.07); }
+.fact-box .fact-label {
+  font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 8px; display: block;
+}
+.fact-box .fact-text { font-size: 13.5px; line-height: 1.75; }
+.pg-dark  .fact-box .fact-text { color: var(--lit); }
+.pg-light .fact-box .fact-text { color: var(--ink2); }
+.fact-box .fact-text strong { font-weight: 700; }
+.pg-dark  .fact-box .fact-text strong { color: var(--white); }
+.pg-light .fact-box .fact-text strong { color: var(--ink); }
+
+/* bullet lists */
+.item-list { list-style: none; margin: 16px 0 24px; max-width: 580px; }
+.item-list li {
+  font-size: 13.5px; padding: 9px 0; display: flex; align-items: flex-start; gap: 12px; line-height: 1.6;
+}
+.pg-dark  .item-list li { color: var(--lit); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.pg-light .item-list li { color: var(--ink2); border-bottom: 1px solid rgba(0,0,0,0.06); }
+.item-list li::before { content: '·'; color: var(--orange); flex-shrink: 0; font-size: 18px; line-height: 1.2; }
+.item-list li strong { font-weight: 700; }
+.pg-dark  .item-list li strong { color: var(--white); }
+.pg-light .item-list li strong { color: var(--ink); }
+
+/* 2-col grid */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 24px 0; }
+.pg-dark  .two-col { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+.pg-light .two-col { background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08); }
+.col-block { padding: 28px 24px; }
+.pg-dark  .col-block { background: var(--black); }
+.pg-light .col-block { background: var(--off); }
+.col-block h4 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 4px;
+  color: var(--orange); margin-bottom: 16px; text-transform: uppercase;
+}
+.col-block ul { list-style: none; }
+.col-block ul li { font-size: 13px; padding: 7px 0; display: flex; align-items: flex-start; gap: 10px; }
+.pg-dark  .col-block ul li { color: var(--lit); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.pg-light .col-block ul li { color: var(--ink2); border-bottom: 1px solid rgba(0,0,0,0.05); }
+.col-block ul li::before { content: '·'; color: var(--orange); font-size: 18px; flex-shrink: 0; line-height: 1.2; }
+
+/* step list */
+.step-list { display: flex; flex-direction: column; gap: 1px; margin: 24px 0; }
+.pg-dark  .step-list { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+.pg-light .step-list { background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08); }
+.step-item { display: flex; align-items: flex-start; }
+.pg-dark  .step-item { background: var(--black); }
+.pg-light .step-item { background: var(--off); }
+.step-num {
+  flex-shrink: 0; width: 56px; min-height: 56px;
+  background: var(--orange);
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px;
+  color: var(--white); display: flex; align-items: center; justify-content: center;
+}
+.step-content { padding: 18px 22px; flex: 1; }
+.step-content h4 { font-family: 'Bebas Neue', sans-serif; font-size: 17px; letter-spacing: 2px; margin-bottom: 6px; }
+.pg-dark  .step-content h4 { color: var(--white); }
+.pg-light .step-content h4 { color: var(--ink); }
+.step-content p { font-size: 13px; line-height: 1.7; }
+.pg-dark  .step-content p { color: var(--lit); }
+.pg-light .step-content p { color: var(--ink2); }
+
+/* supplements */
+.supp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 28px; }
+.pg-dark  .supp-grid { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+.pg-light .supp-grid { background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08); }
+.supp-col { padding: 28px 24px; }
+.pg-dark  .supp-col { background: var(--black); }
+.pg-light .supp-col { background: var(--off); }
+.supp-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
+.supp-col.works h4 { color: var(--orange); }
+.supp-col.skip  h4 { color: #555; }
+.supp-col ul { list-style: none; }
+.supp-col ul li { font-size: 13px; padding: 8px 0; display: flex; align-items: flex-start; gap: 10px; }
+.pg-dark  .supp-col.works ul li { color: var(--lit); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.pg-light .supp-col.works ul li { color: var(--ink2); border-bottom: 1px solid rgba(0,0,0,0.05); }
+.supp-col.works ul li::before { content: '✔'; color: var(--orange); flex-shrink: 0; }
+.supp-col.skip  ul li { color: #555; text-decoration: line-through; text-decoration-color: #444; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.supp-col.skip  ul li::before { content: '✘'; color: #555; flex-shrink: 0; }
+.supp-item-name { font-weight: 700; }
+.pg-dark  .supp-item-name { color: var(--white); }
+.pg-light .supp-item-name { color: var(--ink); }
+
+/* ── CTA ── */
+#cta { background: var(--black); max-width: 820px; margin: 0 auto; overflow: hidden; padding: 0; }
+.cta-top { padding: 72px 64px 52px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.cta-eyebrow { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); display: block; margin-bottom: 20px; }
+.cta-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 8.5vw, 80px); letter-spacing: 2px; line-height: .93; color: var(--white); margin-bottom: 32px; }
+.cta-headline em { color: var(--orange); font-style: normal; }
+.cta-includes { list-style: none; max-width: 480px; margin-bottom: 8px; }
+.cta-includes li { font-size: 13.5px; color: var(--lit); padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 12px; }
+.cta-includes li::before { content: '·'; color: var(--orange); font-size: 18px; flex-shrink: 0; }
+.cta-price { font-family: 'Bebas Neue', sans-serif; font-size: clamp(18px, 3.5vw, 26px); letter-spacing: 3px; color: var(--orange); margin-top: 28px; }
+
+.cta-action {
+  background: var(--orange); padding: 56px 64px 52px;
+  display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 40px;
+}
+.cta-instruction { font-family: 'Bebas Neue', sans-serif; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 4px; }
+.cta-keyword { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 14vw, 120px); letter-spacing: 6px; line-height: 1; color: var(--white); display: block; }
+.cta-note { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-top: 10px; font-weight: 500; }
+.cta-right { text-align: right; }
+.cta-brand-stack { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px; color: rgba(255,255,255,0.85); line-height: 1.9; }
+.cta-url { display: inline-block; margin-top: 14px; background: rgba(0,0,0,0.18); padding: 8px 18px; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 3px; color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .pg-dark, .pg-light { padding: 56px 28px; }
+  #cover { padding: 52px 28px; }
+  .cta-top { padding: 52px 28px 40px; }
+  .cta-action { padding: 44px 28px; flex-direction: column; align-items: flex-start; }
+  .cta-right { text-align: left; }
+  .two-col, .supp-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ COVER — DARK ══ -->
+<section id="cover" class="page">
+  <span class="cover-brand">Father Empowering</span>
+  <div class="cover-center">
+    <h1 class="cover-title">
+      The Man<br>
+      <span>You Must</span><br>
+      Become.
+    </h1>
+    <div class="cover-rule"></div>
+    <p class="cover-sub">The nutrition system for fathers<br>who refuse to disappear.</p>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-footer-label">Nutrition · Performance · Leadership</div>
+    <div class="cover-handle">@fatherempowering</div>
+  </div>
+</section>
+
+<!-- ══ LETTER — LIGHT ══ -->
+<section class="page pg-light">
+  <span class="section-label">A Direct Letter</span>
+  <h2 class="section-title">What nobody<br>tells you.</h2>
+  <div class="divider"></div>
+  <div class="letter-body">
+    <p>You know something has changed.</p>
+    <p>Not dramatically. Gradually. But it's there.</p>
+    <p>The energy that isn't what it used to be. The waistline that crept up without warning. The mirror that reflects a man who let things slide without fully realizing it.</p>
+    <p>You had a physique. You trained. You felt strong. And then life took over — work, kids, responsibility — and your body came second.</p>
+    <p>The problem isn't time. The problem isn't discipline. The problem is that nobody ever gave you a system built for your reality: a father in his 40s who wants to take back control.</p>
+    <div class="letter-pull">"Your kids don't need a perfect father. They need a strong one."</div>
+    <p>This guide is not a diet. It's not a generic plan copied from a fitness magazine. It's a nutrition system built for one profile only: the father between 38 and 49 who is ready to become the man his family deserves.</p>
+    <p>Every decision you make with your nutrition is an act of leadership. Every well-built meal is a signal to your body: I'm taking back command.</p>
+    <p>This is the blueprint.</p>
+    <div class="letter-sig">
+      <div class="name">Maxime Bourdon</div>
+      <div class="role">Founder · Father Empowering</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BREAK ══ -->
+<div class="break-page">
+  <div class="break-inner">
+    Every well-built meal is a signal.<br>
+    <span>I'm taking back command.</span>
+  </div>
+</div>
+
+<!-- ══ CHAPTER 1: PROTEIN — DARK ══ -->
+<section class="page pg-dark">
+  <span class="chapter-label">Chapter 01 / 08</span>
+  <h2 class="section-title">Protein</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">The strength you owe your family.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">After 40, you lose between 1 and 2% of muscle mass per year if you don't actively fight it. That's not an abstract statistic. It's the difference between the father who picks up his kids and the one who makes excuses not to.<br><br>Protein is the only macronutrient that stops this decline. Not partially — completely, if you consume enough of it.</p>
+
+  <h3 class="sub-heading">Why protein defines your physique</h3>
+  <p class="body-p">Proteins are made of amino acids — the building blocks of your muscles, hormones, and immune system. Nine of these amino acids are essential: your body cannot produce them. You must get them from food.</p>
+  <p class="body-p">Without sufficient intake, your body goes looking for amino acids elsewhere. Where? In your muscle tissue. This is called catabolism. At 40, with naturally declining testosterone, your body is even more vulnerable to this process.</p>
+
+  <div class="fact-box">
+    <span class="fact-label">Key Fact</span>
+    <p class="fact-text">Leucine, found in abundance in meats, eggs, and dairy, <strong>directly triggers muscle protein synthesis.</strong> 2 to 3g of leucine per meal is enough to activate this process.</p>
+  </div>
+
+  <h3 class="sub-heading">How much protein per day?</h3>
+  <p class="body-p">The science-backed recommendation for an active man between 38 and 49:</p>
+  <ul class="item-list">
+    <li>Transformation and fat loss: <strong>0.9 to 1.1g per lb of bodyweight</strong></li>
+    <li>Muscle maintenance: <strong>0.7 to 0.9g per lb</strong></li>
+    <li>Example: 185 lbs = <strong>165 to 205g of protein per day</strong></li>
+  </ul>
+  <p class="body-p">These numbers are intentionally higher than general recommendations. After 40, the efficiency of protein synthesis decreases. You need more to get the same result you got at 25.</p>
+
+  <h3 class="sub-heading">Best protein sources</h3>
+  <ul class="item-list">
+    <li><strong>Chicken breast</strong> : 31g per 100g</li>
+    <li><strong>Whole eggs</strong> : complete source, maximum bioavailability</li>
+    <li><strong>Salmon</strong> : 25g per 100g, plus anti-inflammatory omega-3s</li>
+    <li><strong>Lean ground beef</strong> : 26g per 100g, plus zinc and B12</li>
+    <li><strong>Cottage cheese / Greek yogurt</strong> : 10 to 17g, ideal at night</li>
+  </ul>
+
+  <div class="fact-box">
+    <span class="fact-label">Field Rule</span>
+    <p class="fact-text"><strong>Build every meal around a protein source.</strong> 30 to 40g per meal, 4 times a day. Everything else on the plate follows that anchor.</p>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 2: CARBS — LIGHT ══ -->
+<section class="page pg-light">
+  <span class="chapter-label">Chapter 02 / 08</span>
+  <h2 class="section-title">Carbohydrates</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">Fuel for action. Not for passivity.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">Carbohydrates are not your enemy. Passivity is your enemy. An active father who trains hard needs carbs. A sedentary man on the couch, not as much.<br><br>The question isn't whether to eliminate carbs. The question is whether you've <strong>earned them.</strong></p>
+
+  <h3 class="sub-heading">How carbs work</h3>
+  <p class="body-p">Carbohydrates are converted into glucose, which fuels your muscles during intense effort. They're stored as glycogen in your muscles and liver. When your reserves are full, you have the energy to train hard. When they're depleted, your performance collapses.</p>
+  <p class="body-p">The problem for most men over 40 isn't eating too many carbs. It's consuming the wrong carbs, at the wrong time, without burning them off.</p>
+
+  <div class="fact-box">
+    <span class="fact-label">The Principle</span>
+    <p class="fact-text">Low-glycemic carbs (sweet potatoes, oats, brown rice) <strong>keep your energy stable.</strong> Refined carbs create insulin spikes followed by energy crashes, and promote fat storage.</p>
+  </div>
+
+  <h3 class="sub-heading">How much for you?</h3>
+  <div class="two-col">
+    <div class="col-block">
+      <h4>Training Days</h4>
+      <ul>
+        <li>1.4 to 2.3g per lb of bodyweight</li>
+        <li>Ex. 185 lbs = 260 to 425g</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h4>Rest Days</h4>
+      <ul>
+        <li>0.7 to 1.1g per lb of bodyweight</li>
+        <li>Ex. 185 lbs = 130 to 205g</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Recommended sources</h3>
+  <ul class="item-list">
+    <li><strong>Sweet potato</strong>, nutrient-dense, moderate glycemic index</li>
+    <li><strong>White rice around training</strong>, fast digestion, ideal pre/post workout</li>
+    <li><strong>Oats</strong>, slow-digesting, perfect for the morning</li>
+    <li><strong>Fruit</strong>, natural sugars plus micronutrients</li>
+    <li><strong>Green vegetables</strong>, fiber, volume, nutrients — unlimited</li>
+  </ul>
+</section>
+
+<!-- ══ BREAK ══ -->
+<div class="break-page">
+  <div class="break-inner">
+    The question isn't whether to eliminate carbs.<br>
+    <span>The question is whether you've earned them.</span>
+  </div>
+</div>
+
+<!-- ══ CHAPTER 3: FATS — DARK ══ -->
+<section class="page pg-dark">
+  <span class="chapter-label">Chapter 03 / 08</span>
+  <h2 class="section-title">Fats</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">The hormonal foundation you cannot ignore.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">Testosterone is built from cholesterol. Cholesterol comes from dietary fat. A diet too low in fat means low testosterone, which means less energy, less muscle, less drive.<br><br><strong>Eating healthy fats is not optional for a man over 40. It is a biological necessity.</strong></p>
+
+  <h3 class="sub-heading">The fats you need to eat</h3>
+  <ul class="item-list">
+    <li><strong>Monounsaturated fats.</strong> Olive oil, avocados, almonds. Anti-inflammatory. Support cardiovascular health and your hormonal profile.</li>
+    <li><strong>Omega-3s (polyunsaturated fats).</strong> Salmon, sardines, walnuts, chia seeds. Reduce systemic inflammation, the same inflammation that slows your recovery and sabotages your training.</li>
+    <li><strong>Saturated fats (in moderation).</strong> Grass-fed beef, whole eggs. A moderate intake of saturated fats from whole food sources supports testosterone production.</li>
+  </ul>
+
+  <div class="fact-box">
+    <span class="fact-label">How Much?</span>
+    <p class="fact-text"><strong>20 to 35% of your total daily calories.</strong><br><br>For a target of 2,500 calories per day:<br><strong>55 to 97g of fat per day.</strong></p>
+  </div>
+
+  <div class="fact-box">
+    <span class="fact-label">Watch Out</span>
+    <p class="fact-text">Avoid trans fats found in processed foods. If the label says <strong>"partially hydrogenated"</strong>, put it back.</p>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 4: MICRONUTRIENTS — LIGHT ══ -->
+<section class="page pg-light">
+  <span class="chapter-label">Chapter 04 / 08</span>
+  <h2 class="section-title">Micronutrients</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">The secret weapons of male performance.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">Vitamins and minerals don't directly provide energy. But without them, every other system runs at 60% capacity. You train hard, you eat well, and you recover poorly because a magnesium deficiency is destroying your sleep.</p>
+
+  <h3 class="sub-heading">The 4 critical micronutrients</h3>
+  <ul class="item-list">
+    <li>
+      <div>
+        <strong>Vitamin D : The testosterone vitamin</strong><br>
+        The majority of men in the northern US are deficient. Directly linked to testosterone production and muscle strength. Target: 2,000 to 4,000 IU per day. Pair with K2 (100mcg).
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Zinc : Testosterone and recovery</strong><br>
+        Deficiency equals low testosterone. Sources: oysters, beef, pumpkin seeds. Supplement if your diet is low in red meat.
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Magnesium : Sleep and recovery</strong><br>
+        Improves sleep quality, reduces cramping, manages cortisol. Sources: spinach, nuts, pumpkin seeds, 85%+ dark chocolate.
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Omega-3s (EPA/DHA)</strong><br>
+        Anti-inflammatory. Joint recovery, brain, heart. 1 to 3g of EPA+DHA per day. Fatty fish 3x per week or supplement.
+      </div>
+    </li>
+  </ul>
+
+  <div class="fact-box">
+    <span class="fact-label">Simple Strategy</span>
+    <p class="fact-text"><strong>Eat vegetables of 3 different colors every day.</strong> That single principle covers the majority of your micronutrient needs.</p>
+  </div>
+</section>
+
+<!-- ══ BREAK ══ -->
+<div class="break-page">
+  <div class="break-inner">
+    You train hard. You eat well.<br>
+    <span>But if you recover poorly, everything else is noise.</span>
+  </div>
+</div>
+
+<!-- ══ CHAPTER 5: MEAL TIMING — DARK ══ -->
+<section class="page pg-dark">
+  <span class="chapter-label">Chapter 05 / 08</span>
+  <h2 class="section-title">Meal Timing</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">The structure of a disciplined man.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">A father without structure doesn't eat poorly by choice. He eats poorly by default. Meal timing isn't an obsession — it's a system that removes decisions from the equation.</p>
+
+  <h3 class="sub-heading">The daily framework</h3>
+  <ul class="item-list">
+    <li>
+      <div>
+        <strong>Meal 1 — Breakfast (the launch signal)</strong><br>
+        High protein. Complex carbs. Healthy fats. This meal sets your energy level for the next 4 hours.<br>
+        <em style="color:var(--lit2);">Eggs + oats + avocado · Greek yogurt + fruit + nuts.</em>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Dinner (recovery signal)</strong><br>
+        Protein-focused with quality carbs. Fuel tonight's recovery so tomorrow's performance is protected.<br>
+        <em style="color:var(--lit2);">Salmon + sweet potato + spinach · Ground beef + rice + broccoli.</em>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Post-workout (within 2 hours)</strong><br>
+        Fast protein plus carbs to reload glycogen. This is the rebuild window. <strong>Don't skip it.</strong>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Evening meal</strong><br>
+        Slow-digesting protein plus vegetables plus fats. Supports overnight recovery.<br>
+        <em style="color:var(--lit2);">Cottage cheese + berries · Salmon + asparagus + olive oil.</em>
+      </div>
+    </li>
+  </ul>
+
+  <div class="fact-box">
+    <span class="fact-label">On Intermittent Fasting</span>
+    <p class="fact-text">The 16:8 protocol is compatible with this system. <strong>Condition: hit your protein targets within the 8-hour window.</strong></p>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 6: HYDRATION — LIGHT ══ -->
+<section class="page pg-light">
+  <span class="chapter-label">Chapter 06 / 08</span>
+  <h2 class="section-title">Hydration</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">The most overlooked performance tool.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">A dehydration of just 2% of bodyweight measurably reduces physical performance. Focus, strength, endurance — everything drops. And most men show up to their training sessions already dehydrated without knowing it.</p>
+
+  <h3 class="sub-heading">Your daily requirements</h3>
+  <ul class="item-list">
+    <li>Baseline for active men: <strong>125 oz (about one gallon) per day</strong></li>
+    <li>Add <strong>16 to 32 oz per hour</strong> of intense training</li>
+    <li>Simple indicator: <strong>clear to pale yellow urine = well hydrated</strong></li>
+  </ul>
+
+  <h3 class="sub-heading">Electrolytes: why water alone isn't enough</h3>
+  <p class="body-p">Sodium, potassium, and magnesium regulate fluid balance inside your cells. During intense sweating, you lose them. Without replacing them: cramps, fatigue, and performance collapse.</p>
+
+  <div class="fact-box">
+    <span class="fact-label">Simple Solution</span>
+    <p class="fact-text"><strong>32 oz of water + 1/4 tsp sea salt + juice of one lemon.</strong> Effective, cheap, zero additives.</p>
+  </div>
+</section>
+
+<!-- ══ BREAK ══ -->
+<div class="break-page">
+  <div class="break-inner">
+    A disciplined man doesn't eat by accident.<br>
+    <span>He eats with intention.</span>
+  </div>
+</div>
+
+<!-- ══ CHAPTER 7: MEAL PREP — DARK ══ -->
+<section class="page pg-dark">
+  <span class="chapter-label">Chapter 07 / 08</span>
+  <h2 class="section-title">The Meal Prep<br>System</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">Discipline built into your nutrition.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">Improvising your meals is the single biggest threat to your transformation. When you're drained after a long day, your brain defaults to easy. If easy means pizza, that's what you eat. If easy means prepped chicken and cooked rice in the fridge, that's what you eat.<br><br>Meal prep is not a constraint. It is an act of leadership toward yourself.</p>
+
+  <h3 class="sub-heading">The 4-step system</h3>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>Plan on Sunday (20 min)</h4>
+        <p>3 to 4 protein sources for the week. 2 complex carb sources. Your grocery list. That's it.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>Prep Sunday evening (90 min)</h4>
+        <p>Batch cook your proteins. Cook your carbs. Wash and cut your vegetables. Portion everything into containers.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>Assemble, don't cook</h4>
+        <p>Monday through Friday: open the fridge, grab a portion from each category. 5 minutes per meal.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>Iterate every week</h4>
+        <p>What's left on Friday tells you what to adjust the following week.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub-heading">Sample weekly setup</h3>
+  <div class="two-col" style="margin-top:20px;">
+    <div class="col-block">
+      <h4>Proteins &amp; Carbs</h4>
+      <ul>
+        <li>Chicken, salmon, hard-boiled eggs, tuna</li>
+        <li>Rice, sweet potatoes, oats</li>
+      </ul>
+    </div>
+    <div class="col-block">
+      <h4>Vegetables &amp; Fats</h4>
+      <ul>
+        <li>Broccoli, spinach, bell peppers</li>
+        <li>Avocados, olive oil, mixed nuts</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CHAPTER 8: SUPPLEMENTS — LIGHT ══ -->
+<section class="page pg-light">
+  <span class="chapter-label">Chapter 08 / 08</span>
+  <h2 class="section-title">Supplements</h2>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--orange);margin-bottom:28px;">What actually works — without the marketing.</p>
+  <div class="divider"></div>
+  <p class="chapter-intro">The supplement industry is a $180 billion market built on exaggerated promises. But some supplements have solid scientific backing and real value for an active father over 40.</p>
+
+  <div class="supp-grid">
+    <div class="supp-col works">
+      <h4>What Works</h4>
+      <ul>
+        <li><div><span class="supp-item-name">Creatine Monohydrate</span><br>The most studied supplement in existence. Increases strength, improves recovery. 3 to 5g daily. ~$10 to $15/month.</div></li>
+        <li><div><span class="supp-item-name">Whey Protein</span><br>A convenience tool. Useful if you can't hit your protein targets with food alone. Choose whey isolate.</div></li>
+        <li><div><span class="supp-item-name">Vitamin D3 + K2</span><br>Essential for most men in northern states. 2,000 to 4,000 IU of D3 with 100mcg K2. Take with a fat-containing meal.</div></li>
+        <li><div><span class="supp-item-name">Magnesium Glycinate</span><br>Sleep, recovery, stress management. 300 to 400mg before bed.</div></li>
+        <li><div><span class="supp-item-name">Omega-3 (EPA/DHA)</span><br>If you don't eat fatty fish 3x per week. 1 to 2g of EPA+DHA daily.</div></li>
+      </ul>
+    </div>
+    <div class="supp-col skip">
+      <h4>Skip These</h4>
+      <ul>
+        <li>Fat burners</li>
+        <li>Testosterone boosters (OTC)</li>
+        <li>Detox teas and cleanses</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fact-box" style="margin-top:32px;">
+    <span class="fact-label">The Golden Rule</span>
+    <p class="fact-text"><strong>If you can't explain in one sentence why you're taking a supplement — don't take it.</strong></p>
+  </div>
+</section>
+
+<!-- ══ BREAK ══ -->
+<div class="break-page">
+  <div class="break-inner">
+    Knowledge doesn't transform bodies.<br>
+    <span>Execution does.</span>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<section id="cta" class="page">
+  <div class="cta-top">
+    <span class="cta-eyebrow">The Next Step</span>
+    <h2 class="cta-headline">
+      The <em>100-Day</em><br>
+      Father<br>
+      Rebuild.
+    </h2>
+    <ul class="cta-includes">
+      <li>Custom training program</li>
+      <li>Custom nutrition protocol</li>
+      <li>Weekly accountability check-ins</li>
+      <li>Strategic 1:1 calls</li>
+    </ul>
+    <div class="cta-price">$2,000 · 10 spots per month</div>
+  </div>
+  <div class="cta-action">
+    <div>
+      <div class="cta-instruction">DM me the word</div>
+      <span class="cta-keyword">LEGACY</span>
+      <p class="cta-note">@fatherempowering · Application only</p>
+    </div>
+    <div class="cta-right">
+      <div class="cta-brand-stack">FATHER EMPOWERING<br>THE LEGACY PROTOCOL<br>100 DAYS</div>
+      <div class="cta-url">fatherempowering.com</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.page, .break-page').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
